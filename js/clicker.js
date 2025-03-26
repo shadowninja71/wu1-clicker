@@ -42,12 +42,12 @@ let achievements = [
         acquired: false,
     },
     {
-        description: 'Nu börjar det likna något, fortsätt gräva!',
+        description: 'Now its starting to look like something, keep digging!',
         requiredUpgrades: 10,
         acquired: false,
     },
     {
-        description: 'Klickare, med licens att klicka!',
+        description: 'Clicker, whit licens to click!',
         requiredClicks: 10,
         acquired: false,
     },
@@ -163,24 +163,39 @@ window.addEventListener('load', (event) => {
  */
 upgrades = [
     {
-        name: 'Sop',
+        name: 'Upgrade pickaxe',
         cost: 10,
-        amount: 1,
+        clicks: 1,
     },
     {
-        name: 'Kvalitetsspade',
+        name: 'Enchant pickaxe',
+        cost: 100,
+        clicks: 5,
+    },
+    {
+        name: 'Villager',
         cost: 50,
-        clicks: 2,
+        amount: 2,
     },
     {
-        name: 'Skottkärra',
+        name: 'Player',
         cost: 100,
         amount: 10,
     },
     {
-        name: 'Grävmaskin',
+        name: 'Tnt dupper',
         cost: 1000,
         amount: 100,
+    },
+    {
+        name: 'Beacon',
+        cost: 10000,
+        amount: 1000,
+    },
+    {
+        name: 'quary',
+        cost: 100000,
+        amount: 10000,
     },
 ];
 
@@ -211,21 +226,21 @@ function createCard(upgrade) {
     if (upgrade.amount) {
         header.textContent = `${upgrade.name}, +${upgrade.amount} per sekund.`;
     } else {
-        header.textContent = `${upgrade.name}, +${upgrade.clicks} per klick.`;
+        header.textContent = `${upgrade.name}, +${upgrade.clicks} per click.`;
     }
-    cost.textContent = `Köp för ${upgrade.cost} benbitar.`;
+    cost.textContent = `Buy for ${upgrade.cost} Ores.`;
 
     card.addEventListener('click', (e) => {
         if (money >= upgrade.cost) {
             acquiredUpgrades++;
             money -= upgrade.cost;
             upgrade.cost *= 1.5;
-            cost.textContent = 'Köp för ' + upgrade.cost + ' benbitar';
+            cost.textContent = 'Buy for ' + upgrade.cost + ' ores';
             moneyPerSecond += upgrade.amount ? upgrade.amount : 0;
             moneyPerClick += upgrade.clicks ? upgrade.clicks : 0;
-            message('Grattis du har köpt en uppgradering!', 'success');
+            message('Congratulations you have bought a uprade!', 'success');
         } else {
-            message('Du har inte råd.', 'warning');
+            message('You dont have enough.', 'warning');
         }
     });
 
